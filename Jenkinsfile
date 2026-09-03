@@ -8,6 +8,16 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Test Docker') {
+            steps {
+                bat '''
+                    where docker
+                    docker --version
+                    docker compose version
+                    docker info
+                '''
+            }
+        }
 
         stage('Start Test Database') {
             steps {
