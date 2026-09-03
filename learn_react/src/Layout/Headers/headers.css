@@ -1,0 +1,88 @@
+
+.nav-top {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  padding: 10px 40px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.nav-top .left-container {
+  flex: 1;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-top .left-container .logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-top .left-container .logo-container .logo {
+  background-color: #EF4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.logo-text{
+  color: white;
+  font-weight: bold;
+  margin: 0px;
+}
+
+
+.nav-top .middle-container {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 3;
+}
+
+.middle-container .text-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.text-container p{
+  margin: 0px 10px;
+  font-size: 13px;
+}
+
+.nav-top .right-container {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.right-container button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  border: 0px;
+  color: #EF4444;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid #EF4444;
+  padding: 10px 40px;
+}
+
+.right-container button p{
+  padding-bottom: 0px;
+  margin: 0px;
+}
+

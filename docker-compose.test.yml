@@ -1,0 +1,11 @@
+services:
+  db-test:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: testdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./project_backend/db/init.sql:/docker-entrypoint-initdb.d/init.sql
