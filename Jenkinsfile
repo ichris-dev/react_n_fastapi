@@ -68,12 +68,11 @@ pipeline {
         stage('Push Images') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'fd8e91e0-b3d3-4f6a-9e16-30d62e53749c', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
-                    bat 'echo %DOCKERHUB_PASS% | docker login -u %DOCKERHUB_USER% --password-stdin'
+                    bat 'docker login -u %DOCKERHUB_USER% -p %DOCKERHUB_PASS%'
                     bat 'docker push impanochrispe/react-projects-api:%BUILD_NUMBER%'
                     bat 'docker push impanochrispe/react-projects-api:latest'
                     bat 'docker push impanochrispe/react-projects-web:%BUILD_NUMBER%'
                     bat 'docker push impanochrispe/react-projects-web:latest'
-                    
                 }
             }
         }
