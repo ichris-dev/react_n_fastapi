@@ -8,6 +8,7 @@ pipeline {
                 checkout scm
             }
         }
+
         stage('Test Docker') {
             steps {
                 bat '''
@@ -22,14 +23,14 @@ pipeline {
         stage('Start Test Database') {
             steps {
                 bat 'docker compose -f docker-compose.test.yml up -d'
-                bat 'timeout /t 8'
+                bat 'ping -n 9 127.0.0.1 > nul'
             }
         }
 
         stage('Backend: Install & Test') {
             steps {
                 dir('project_backend') {
-                    bat 'python -m venv venv'
+                    bat 'py -m venv venv'
                     bat 'venv\\Scripts\\pip install --upgrade pip'
                     bat 'venv\\Scripts\\pip install -r requirements.txt'
                     bat 'venv\\Scripts\\pip install pytest pytest-asyncio httpx'
@@ -55,7 +56,7 @@ pipeline {
             steps {
                 bat 'docker compose down'
                 bat 'docker compose up -d --build'
-                bat 'timeout /t 10'
+                bat 'ping -n 11 127.0.0.1 > nul'
                 bat 'curl -f http://localhost:8000/docs'
                 bat 'curl -f http://localhost:3000'
             }
