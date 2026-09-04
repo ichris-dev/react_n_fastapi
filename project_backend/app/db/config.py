@@ -6,16 +6,6 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 
 class Settings(BaseSettings):
     
-    SECRET_KEY: str
-    
-    DEBUG: bool = False
-    
-    MODEL_PATH: str
-    
-    MODEL_NAME: str
-    
-    MEMOIZATION_FLAG: bool
-    
     DATABASE_URL: str
     
     model_config = SettingsConfigDict(
