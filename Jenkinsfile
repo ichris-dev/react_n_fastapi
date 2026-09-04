@@ -47,8 +47,8 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                bat 'docker build -t %DOCKERHUB_USER%/react-projects-api:%BUILD_NUMBER% -t %DOCKERHUB_USER%/react-projects-api:latest ./project_backend'
-                bat 'docker build -t %DOCKERHUB_USER%/react-projects-web:%BUILD_NUMBER% -t %DOCKERHUB_USER%/react-projects-web:latest ./learn_react'
+                bat 'docker build -t impanochrispe/react-projects-api:%BUILD_NUMBER% -t impanochrispe/react-projects-api:latest ./project_backend'
+                bat 'docker build -t impanochrispe/react-projects-web:%BUILD_NUMBER% -t impanochrispe/react-projects-web:latest ./learn_react'
             }
         }
 
@@ -66,10 +66,10 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
                     bat 'echo %DOCKERHUB_PASS% | docker login -u %DOCKERHUB_USER% --password-stdin'
-                    bat 'docker push %DOCKERHUB_USER%/react-projects-api:%BUILD_NUMBER%'
-                    bat 'docker push %DOCKERHUB_USER%/react-projects-api:latest'
-                    bat 'docker push %DOCKERHUB_USER%/react-projects-web:%BUILD_NUMBER%'
-                    bat 'docker push %DOCKERHUB_USER%/react-projects-web:latest'
+                    bat 'docker push impanochrispe/react-projects-api:%BUILD_NUMBER%'
+                    bat 'docker push impanochrispe/react-projects-api:latest'
+                    bat 'docker push impanochrispe/react-projects-web:%BUILD_NUMBER%'
+                    bat 'docker push impanochrispe/react-projects-web:latest'
                 }
             }
         }
