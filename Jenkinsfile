@@ -30,7 +30,7 @@ pipeline {
         stage('Backend: Install & Test') {
             steps {
                 dir('project_backend') {
-                    bat 'python -m venv venv'
+                    bat 'py -m venv venv'
                     bat 'venv\\Scripts\\pip install --upgrade pip'
                     bat 'venv\\Scripts\\pip install -r requirements.txt'
                     bat 'venv\\Scripts\\pip install pytest pytest-asyncio httpx'
