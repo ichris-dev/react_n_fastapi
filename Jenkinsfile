@@ -22,6 +22,7 @@ pipeline {
 
         stage('Start Test Database') {
             steps {
+                bat 'docker compose -f docker-compose.test.yml down -v'
                 bat 'docker compose -f docker-compose.test.yml up -d'
                 bat 'ping -n 9 127.0.0.1 > nul'
             }
