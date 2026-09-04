@@ -1,11 +1,14 @@
 pipeline {
     agent any
+
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+
         stage('Test Docker') {
             steps {
                 bat '''
@@ -16,12 +19,14 @@ pipeline {
                 '''
             }
         }
+
         stage('Start Test Database') {
             steps {
                 bat 'docker compose -f docker-compose.test.yml up -d'
                 bat 'ping -n 9 127.0.0.1 > nul'
             }
         }
+
         stage('Backend: Install & Test') {
             steps {
                 dir('project_backend') {
@@ -39,12 +44,14 @@ pipeline {
                 }
             }
         }
+
         stage('Build Docker Images') {
             steps {
                 bat 'docker build -t %DOCKERHUB_USER%/react-projects-api:%BUILD_NUMBER% -t %DOCKERHUB_USER%/react-projects-api:latest ./project_backend'
                 bat 'docker build -t %DOCKERHUB_USER%/react-projects-web:%BUILD_NUMBER% -t %DOCKERHUB_USER%/react-projects-web:latest ./learn_react'
             }
         }
+
         stage('Smoke Test Locally') {
             steps {
                 bat 'docker compose down'
@@ -54,6 +61,7 @@ pipeline {
                 bat 'curl -f http://localhost:3000'
             }
         }
+
         stage('Push Images') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
@@ -66,6 +74,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             echo "Build #${env.BUILD_NUMBER} finished: ${currentBuild.currentResult}"
