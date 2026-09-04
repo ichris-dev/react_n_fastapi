@@ -54,9 +54,12 @@ pipeline {
 
         stage('Smoke Test Locally') {
             steps {
-                bat 'docker compose down'
+                bat 'docker compose down -v'
                 bat 'docker compose up -d --build'
-                bat 'ping -n 11 127.0.0.1 > nul'
+                bat 'ping -n 16 127.0.0.1 > nul'
+                bat 'docker compose ps'
+                bat 'docker compose logs api'
+                bat 'docker compose logs db'
                 bat 'curl -f http://localhost:8000/docs'
                 bat 'curl -f http://localhost:3000'
             }
