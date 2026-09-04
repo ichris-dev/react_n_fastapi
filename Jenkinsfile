@@ -73,6 +73,7 @@ pipeline {
                     bat 'docker push impanochrispe/react-projects-api:latest'
                     bat 'docker push impanochrispe/react-projects-web:%BUILD_NUMBER%'
                     bat 'docker push impanochrispe/react-projects-web:latest'
+                    
                 }
             }
         }
@@ -81,6 +82,7 @@ pipeline {
     post {
         always {
             echo "Build #${env.BUILD_NUMBER} finished: ${currentBuild.currentResult}"
+            bat 'docker logout'
         }
     }
 }
