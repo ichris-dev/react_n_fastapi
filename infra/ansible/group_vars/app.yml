@@ -1,0 +1,6 @@
+postgres_user: postgres
+postgres_db: app
+# postgres_password is deliberately NOT here - see the vault instructions
+# in README.md. Never commit a real password to a plain YAML file.
+# Pick a real, strong password for production - don't reuse the "postgres"
+# default from .env.example, that's fine for local dev only.
